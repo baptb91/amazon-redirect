@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reflet Habitat - Redirection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .container {
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .logo {
+            font-size: 64px;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        p {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+        
+        .spinner {
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🏠</div>
+        <h1>Reflet Habitat</h1>
+        <p>Redirection vers le produit...</p>
+        <div class="spinner"></div>
+    </div>
+
+    <script>
+        // Récupère l'ASIN depuis l'URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const asin = urlParams.get('asin');
+
+        if (asin) {
+            // Construction du lien Amazon optimisé avec tag affilié
+            const amazonUrl = 'https://www.amazon.fr/dp/' + asin + '?tag=reflethabitat-21&linkCode=ll1&th=1&psc=1';
+            
+            console.log('Redirection vers:', amazonUrl);
+            
+            // Redirection après 500ms
+            setTimeout(function() {
+                window.location.href = amazonUrl;
+            }, 500);
+        } else {
+            // Si pas d'ASIN, affiche un message et redirige vers Pinterest
+            document.querySelector('p').textContent = 'Aucun produit spécifié. Redirection vers Pinterest...';
+            
+            setTimeout(function() {
+                window.location.href = 'https://pinterest.com/reflethabitat';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
+```
